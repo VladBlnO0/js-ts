@@ -1,6 +1,6 @@
 <?php
 
-function validate($balance, $amount)
+function validate($balance, $amount): bool
 {
     if ($amount <= 0.0) {
         return false;
@@ -27,16 +27,14 @@ function transaction($senderCard, $receiverBalance, $amount)
     echo "Balance now: " . ($receiverBalance + $amount) . "\n";
 }
 
-function getCardNumber()
+function getCardNumber(): string
 {
     $num = rand() % 999999999 + 1;
-    $numStr = (string)$num;
-    $cardNumber = strlen($numStr) + 1;
-    $cardNumber = $numStr;
-    return $cardNumber;
+    $numStr = (string) $num;
+    return strlen($numStr) + 1;
 }
 
-function validateChangeDailyLimit($newLimit, $currentLimit)
+function validateChangeDailyLimit($newLimit, $currentLimit): bool
 {
     if ($newLimit <= 0) {
         echo "Limit must not be greater than 0\n";
@@ -50,32 +48,24 @@ function validateChangeDailyLimit($newLimit, $currentLimit)
     return true;
 }
 
-function main()
-{
-    $balance = 1000.0;
-    $amount = 250.0;
-    $years = 3;
-    $newLimit = 40;
-    $currentLimit = 20;
+$balance = 1000.0;
+$amount = 250.0;
+$years = 3;
+$newLimit = 40;
+$currentLimit = 20;
 
-    echo "Transaction valid? " . (validate($balance, $amount) ? " Yes" : " No") . "\n";
+echo "Transaction valid? " . (validate($balance, $amount) ? " Yes" : " No") . "\n";
 
-    echo "New card number: " . getCardNumber() . "\n";
+echo "New card number: " . getCardNumber() . "\n";
 
-    validateChangeDailyLimit($newLimit, $currentLimit);
+validateChangeDailyLimit($newLimit, $currentLimit);
 
-    $ok = validate($balance, $amount);
-    echo "Transaction valid? " . ($ok ? "Yes" : "No") . "\n";
+$ok = validate($balance, $amount);
+echo "Transaction valid? " . ($ok ? "Yes" : "No") . "\n";
 
-    $newBalance = deposit($balance, 2.5, $years);
-    echo "Balance after " . $years . " years = " . $newBalance . "\n";
+$newBalance = deposit($balance, 2.5, $years);
+echo "Balance after " . $years . " years = " . $newBalance . "\n";
 
-    $str = "4242 4242 4242 4242";
-    transaction($str, $balance, 10.5);
+$str = "4242 4242 4242 4242";
+transaction($str, $balance, 10.5);
 
-    return 0;
-}
-
-main();
-
-?>
