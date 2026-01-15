@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@denosaurs/python": "jsr:@denosaurs/python@^0.4.6"
+  }
+}
